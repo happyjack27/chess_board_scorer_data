@@ -1,0 +1,25 @@
+each bitboard file stores 1000 games and their mirror images.
+when it's black's turn, the board is flipped, the colors swapped, and the score inverted, so that all the boards and scores represent white-to-move.
+each bit board is stored as 14 long's (14x64-bit = 14x8x8 bytes = 896 bytes).
+
+the first long (layer 0) is the score in centi-pawns, or +/-10000 if there's a guaranteed checkmate.
+the last long (layer 14) is all 1's, it's for alignment / error checking.
+longs 1,2,3,4,5,6 are white:
+1 - pawns
+2 - knights
+3 - bishops
+4 - rooks
+5 - queens
+6 - kings
+
+longs 7,8,9,10,11,12 are black:
+7 - pawns
+8 - knights
+9 - bishops
+10 - rooks
+11 - queens
+12 - kings
+
+it's stored in order: file,rank. so the starting position white pawn layer (layer 1) looks like this:
+0000000011111111000000000000000000000000000000000000000000000000
+
